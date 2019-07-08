@@ -12,3 +12,5 @@
 - 插入排序 [algorithm4_2.cpp](./algorithm4_2.cpp)  复杂版本 [algorithm4_2_person.cpp](./algorithm4_2_person.cpp)
 - PAT A1025 Ranking  [algorithm4_3.cpp](./algorithm4_3.cpp)  
 - 散列初步  [algorithm4_4.cpp](./algorithm4_4.cpp)  
+- 散列字符串问题  [algorithm4_5.cpp](./algorithm4_5.cpp)  
+- 递归——n的阶乘 [algorithm4_6.cpp](./algorithm4_6.cpp)  
