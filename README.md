@@ -16,3 +16,4 @@
 - 递归——n的阶乘 [algorithm4_6.cpp](./algorithm4_6.cpp)
 - 递归——Fibonacci数列[algorithm4_7.cpp](./algorithm4_7.cpp)
 - 递归——全数列[algorithm4_8.cpp](./algorithm4_8.cpp)
+- 递归n皇后——暴力法，直接遍历[algorithm4_9](./algorithm4_9.cpp)
