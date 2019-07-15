@@ -18,4 +18,5 @@
 - 递归——全数列[algorithm4_8.cpp](./algorithm4_8.cpp)
 - 递归n皇后——暴力法，直接遍历[algorithm4_9](./algorithm4_9.cpp)
 - 递归n皇后——回溯法，不在全部遍历[algorithm4_10](./algorithm4_10)
+- 贪心算法初步PAT B1020 月饼——[algorithm4_11](./algorithm4_11.cpp)
 
