@@ -20,3 +20,6 @@
 - 递归n皇后——回溯法，不在全部遍历[algorithm4_10](./algorithm4_10)
 - 贪心算法初步PAT B1020 月饼——[algorithm4_11](./algorithm4_11.cpp)
 
+## 第六章
+
+- vector访问 [algorithm6_1.cpp](./algorithm6_1.cpp)
