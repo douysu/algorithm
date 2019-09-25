@@ -91,7 +91,7 @@ public class Ant {
         double[] probability = new double[cityNum]; // 转移概率矩阵
         double sum = 0;
 
-        // 计算分母
+        // 计算公式分母
         for (int i : allowedCities) {
             sum += Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta);
         }
@@ -106,6 +106,7 @@ public class Ant {
         }
 
         // 选择下一个城市(权重随机数算法/轮盘赌)
+        // 轮盘赌算法：当前给定的随机数，必须小于等于该随机数所对应的权重数组的值以及它前面所有值的累加。
         int selectCity = 0;
 
         Random random = new Random();
@@ -119,7 +120,7 @@ public class Ant {
             }
         }
 
-        // 从允许选择的城市中去掉选中的下一个城市
+        // 从城市列表中去掉选择的城市
         for (Integer i : allowedCities) {
             if (i.intValue() == selectCity) {
                 allowedCities.remove(i);
@@ -127,10 +128,10 @@ public class Ant {
             }
         }
 
-        // 在禁忌表中添加选中的下一个城市
+        // 在禁忌表中添加选择的城市
         tabu.add(selectCity);
 
-        // 将当前城市改为选中的下一个城市
+        // 将当前城市改为选择的城市
         currentCity = selectCity;
     }
 

@@ -28,7 +28,9 @@ public class Test {
             * Q：用于信息素增量的设置，在蚁周模型下，信息素增量=Q/当前解路径总长度。蚁周模型利用的是全局信息，即蚂蚁完成一个循环后更新所有路径上的信息素
             * */
             ACO aco = new ACO(48, 10, 100, 1.0, 10.0, 0.5, 10, Constant.ANT_QUANTITY);
+            // 初始化
             aco.init(tspData);
+            // 计算概率，选择路径
             aco.solve();
             avg += aco.getBestLength();
             if (aco.getBestLength() > max) {
@@ -41,6 +43,6 @@ public class Test {
         // 计时器结束
         long endTime = System.currentTimeMillis();
 
-        System.out.println(avg / 10.0 + "\t" + min + "\t" + max + "\t" + (endTime - startTime) / 1000F + "秒");
+        System.out.println("平均值是" + avg / 10.0 + "\t" + "最小值是" + min + "\t" + "最大值是" + max + "\t" + "运行时间是" + (endTime - startTime) / 1000F + "秒");
     }
 }
