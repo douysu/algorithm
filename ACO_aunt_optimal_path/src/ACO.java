@@ -1,6 +1,7 @@
 /**
  * Created by houseyoung on 16/5/11 19:47.
  */
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 
 public class ACO {
@@ -52,11 +53,11 @@ public class ACO {
      * @throws IOException
      */
     public void init(String filename) throws IOException {
-        // 从文件中获取X坐标矩阵、Y坐标矩阵
+        // 获取城市X坐标、Y坐标矩阵
         x = ReadFile.getX(cityNum, filename);
         y = ReadFile.getY(cityNum, filename);
 
-        // 计算距离矩阵
+        // 计算距离矩阵，两城市之间的距离，存放在对称矩阵中
         getDistance(x, y);
 
         // 初始化信息素矩阵
@@ -126,13 +127,13 @@ public class ACO {
                 double[][] delta = ants[ant].getDelta();
                 for (int i = 0; i < cityNum; i++) {
                     for (int j : ants[ant].getTabu()) {
-                        if (deltaType == 0) {
+                        if (deltaType == Constant.ANT_QUANTITY) {
                             delta[i][j] = Q; // Ant-quantity System
                         }
-                        if (deltaType == 1) {
+                        if (deltaType == Constant.ANT_DENSITY) {
                             delta[i][j] = Q / distance[i][j]; // Ant-density System
                         }
-                        if (deltaType == 2) {
+                        if (deltaType == Constant.ANT_CYCLE) {
                             delta[i][j] = Q / ants[ant].getTourLength(); // Ant-cycle System
                         }
                     }
