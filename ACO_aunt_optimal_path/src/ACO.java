@@ -11,7 +11,7 @@ public class ACO {
     private double[][] pheromone; // 信息素矩阵
 
     private Path path;
-    private int[] bestTour; // 最佳路径
+    //private int[] bestTour; // 最佳路径
 
     private int antNum; // 蚂蚁数量
     private int generation; // 迭代次数
@@ -69,7 +69,8 @@ public class ACO {
 
         // 初始化最佳长度及最佳路径
         path.setBestLength(Integer.MAX_VALUE);
-        bestTour = new int[cityNum + 1];
+        path.initBestTour(cityNum);
+        //bestTour = new int[cityNum + 1];
 
         // 初始化antNum个蚂蚁
         for (int i = 0; i < antNum; i++) {
@@ -117,7 +118,8 @@ public class ACO {
                 if (ants[currentAnt].getTourLength() < path.getBestLength()) {
                     path.setBestLength(ants[currentAnt].getTourLength());
                     for (int k = 0; k < cityNum + 1; k++) {
-                        bestTour[k] = ants[currentAnt].getTabu().get(k).intValue();
+                        path.setBestTour(k, ants[currentAnt].getTabu().get(k).intValue());
+                        //bestTour[k] = ants[currentAnt].getTabu().get(k).intValue();
                     }
                 }
 
@@ -180,9 +182,9 @@ public class ACO {
         System.out.println("最佳长度: " + path.getBestLength());
         System.out.print("最佳路径: ");
         for (int i = 0; i < cityNum - 1; i++) {
-            System.out.print(bestTour[i] + 1 + "-");
+            System.out.print(getBestTour()[i] + 1 + "-");
         }
-        System.out.println(bestTour[cityNum - 1] + 1);
+        System.out.println(getBestTour()[cityNum - 1] + 1);
     }
 
     /**
@@ -190,7 +192,7 @@ public class ACO {
      * @return
      */
     public int[] getBestTour() {
-        return bestTour;
+        return path.getBestTour();
     }
 
     /**
