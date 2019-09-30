@@ -1,9 +1,15 @@
+/**
+ * @author 憨豆酒 YinDou
+ * @date 20190930
+ * @descripe 蚂蚁类
+ */
 import java.util.Random;
 import java.util.ArrayList;
 
 public class Ant {
     private ArrayList<Integer> tabu; // 禁忌表
     private ArrayList<Integer> allowedCities; // 下一步允许选择的城市
+    private ArrayList<Node> nodeList;// 节点城市列表
     private double[][] delta; // 信息素增量矩阵
     private double[][] distance; // 距离矩阵
     private double[][] eta; // 能见度矩阵
@@ -29,14 +35,15 @@ public class Ant {
     /**
      * 初始化蚂蚁，随机挑选一个城市作为起始位置
      *
-     * @param distance
+     * @param nodeList
      * @param alpha
      * @param beta
      */
-    public void init(double[][] distance, double alpha, double beta) {
+    public void init(ArrayList<Node> nodeList, double alpha, double beta) {
         this.alpha = alpha;
         this.beta = beta;
-        this.distance = distance;
+        this.nodeList = nodeList;
+        //this.distance = distance;
 
         // 初始化禁忌表为空
         tabu = new ArrayList<Integer>();
@@ -75,7 +82,8 @@ public class Ant {
         for (int i = 0; i < cityNum - 1; i++) {
             eta[i][i] = 0; // 对角线为0
             for (int j = i + 1; j < cityNum; j++) {
-                eta[i][j] = 1.0 / distance[i][j];
+                //eta[i][j] = 1.0 / distance[i][j];
+                eta[i][j] = 1.0 /nodeList.get(i).getDistance()[j];
                 eta[j][i] = eta[i][j];
             }
         }
@@ -144,7 +152,8 @@ public class Ant {
         int length = 0;
 
         for (int i = 0; i < cityNum; i++) {
-            length += distance[tabu.get(i)][tabu.get(i + 1)];
+            //length += distance[tabu.get(i)][tabu.get(i + 1)];
+            length += nodeList.get(i).getDistance()[i+1];
         }
 
         return length;

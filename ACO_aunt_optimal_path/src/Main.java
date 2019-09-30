@@ -31,14 +31,14 @@ public class Main {
             // 初始化
             aco.init(tspData);
             // 计算概率，选择路径
-            aco.solve();
-            avg += aco.getBestLength();
-            if (aco.getBestLength() > max) {
-                max = aco.getBestLength();
-            }
-            if (aco.getBestLength() < min) {
-                min = aco.getBestLength();
-            }
+//            aco.solve();
+//            avg += aco.getBestLength();
+//            if (aco.getBestLength() > max) {
+//                max = aco.getBestLength();
+//            }
+//            if (aco.getBestLength() < min) {
+//                min = aco.getBestLength();
+//            }
         }
         // 计时器结束
         long endTime = System.currentTimeMillis();
