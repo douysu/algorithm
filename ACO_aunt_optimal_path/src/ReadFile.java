@@ -11,12 +11,13 @@ import java.io.InputStreamReader;
 public class ReadFile {
     /**
      * 读取X坐标矩阵
+     *
      * @param cityNum
      * @param filename
      * @return
      * @throws IOException
      */
-    public static int[] getX (int cityNum, String filename) throws IOException {
+    public static int[] getX(int cityNum, String filename) throws IOException {
         int[] x = new int[cityNum]; // X坐标矩阵
         String str;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
@@ -34,12 +35,13 @@ public class ReadFile {
 
     /**
      * 读取Y坐标矩阵
+     *
      * @param cityNum
      * @param filename
      * @return
      * @throws IOException
      */
-    public static int[] getY (int cityNum, String filename) throws IOException {
+    public static int[] getY(int cityNum, String filename) throws IOException {
         int[] y = new int[cityNum]; // Y坐标矩阵
         String str;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));

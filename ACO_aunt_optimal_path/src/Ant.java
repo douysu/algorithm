@@ -18,6 +18,7 @@ public class Ant {
 
     /**
      * 构造方法
+     *
      * @param cityNum
      */
     public Ant(int cityNum) {
@@ -27,6 +28,7 @@ public class Ant {
 
     /**
      * 初始化蚂蚁，随机挑选一个城市作为起始位置
+     *
      * @param distance
      * @param alpha
      * @param beta
@@ -82,6 +84,7 @@ public class Ant {
 
     /**
      * 选择下一个城市
+     *
      * @param pheromone
      */
     public void selectNextTrack(double[][] pheromone) {
@@ -134,6 +137,7 @@ public class Ant {
 
     /**
      * 计算路径长度
+     *
      * @return
      */
     private int calculateTourLength() {

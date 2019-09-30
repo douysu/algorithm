@@ -1,6 +1,28 @@
+/**
+ * @author 憨豆酒 YinDou
+ * @date 20190930
+ * @descripe 路径类，存储最佳长度和路径
+ */
 public class Path {
     private int bestLength; // 最佳长度
     private int[] bestTour; // 最佳路径
+    private int cityNum; //城市数量
+
+    public Path(int cityNum) {
+        this.cityNum = cityNum;
+    }
+
+    /**
+     * 在控制台中输出最佳长度及最佳路径
+     */
+    public void printBestLengthAndTour() {
+        System.out.println("最佳长度: " + bestLength);
+        System.out.print("最佳路径: ");
+        for (int i = 0; i < cityNum - 1; i++) {
+            System.out.print(bestTour[i] + 1 + "-");
+        }
+        System.out.println(bestTour[cityNum - 1] + 1);
+    }
 
     /**
      * 设置最佳长度
@@ -11,6 +33,7 @@ public class Path {
 
     /**
      * 输出最佳长度
+     *
      * @return
      */
     public int getBestLength() {
@@ -33,6 +56,7 @@ public class Path {
 
     /**
      * 输出最佳路径
+     *
      * @return
      */
     public int[] getBestTour() {

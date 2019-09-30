@@ -1,4 +1,3 @@
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 
 public class ACO {
@@ -22,6 +21,7 @@ public class ACO {
 
     /**
      * 构造方法
+     *
      * @param cityNum
      * @param antNum
      * @param generation
@@ -41,11 +41,12 @@ public class ACO {
         this.deltaType = deltaType;
 
         ants = new Ant[antNum];
-        path = new Path();
+        path = new Path(cityNum);
     }
 
     /**
      * 初始化
+     *
      * @param filename
      * @throws IOException
      */
@@ -79,11 +80,12 @@ public class ACO {
 
     /**
      * 计算距离矩阵
+     *
      * @param x
      * @param y
      * @throws IOException
      */
-    private void getDistance (int[] x, int[] y) throws IOException {
+    private void getDistance(int[] x, int[] y) throws IOException {
         // 计算距离矩阵
         distance = new double[cityNum][cityNum];
         for (int i = 0; i < cityNum - 1; i++) {
@@ -148,7 +150,7 @@ public class ACO {
         }
 
         // 打印最佳结果
-        print();
+        path.printBestLengthAndTour();
     }
 
     /**
@@ -173,19 +175,8 @@ public class ACO {
     }
 
     /**
-     * 在控制台中输出最佳长度及最佳路径
-     */
-    private void print() {
-        System.out.println("最佳长度: " + path.getBestLength());
-        System.out.print("最佳路径: ");
-        for (int i = 0; i < cityNum - 1; i++) {
-            System.out.print(getBestTour()[i] + 1 + "-");
-        }
-        System.out.println(getBestTour()[cityNum - 1] + 1);
-    }
-
-    /**
      * 输出最佳路径
+     *
      * @return
      */
     public int[] getBestTour() {
@@ -194,6 +185,7 @@ public class ACO {
 
     /**
      * 输出最佳长度
+     *
      * @return
      */
     public int getBestLength() {
@@ -202,6 +194,7 @@ public class ACO {
 
     /**
      * 输出X坐标矩阵
+     *
      * @return
      */
     public int[] getX() {
@@ -210,6 +203,7 @@ public class ACO {
 
     /**
      * 输出Y坐标矩阵
+     *
      * @return
      */
     public int[] getY() {
