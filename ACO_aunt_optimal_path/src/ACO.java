@@ -1,6 +1,3 @@
-/**
- * Created by houseyoung on 16/5/11 19:47.
- */
 import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 
@@ -13,7 +10,7 @@ public class ACO {
     private double[][] distance; // 距离矩阵
     private double[][] pheromone; // 信息素矩阵
 
-    private int bestLength; // 最佳长度
+    private Path path;
     private int[] bestTour; // 最佳路径
 
     private int antNum; // 蚂蚁数量
@@ -45,6 +42,7 @@ public class ACO {
         this.deltaType = deltaType;
 
         ants = new Ant[antNum];
+        path = new Path();
     }
 
     /**
@@ -70,7 +68,7 @@ public class ACO {
         }
 
         // 初始化最佳长度及最佳路径
-        bestLength = Integer.MAX_VALUE;
+        path.setBestLength(Integer.MAX_VALUE);
         bestTour = new int[cityNum + 1];
 
         // 初始化antNum个蚂蚁
@@ -109,15 +107,15 @@ public class ACO {
             for (int currentAnt = 0; currentAnt < antNum; currentAnt++) {
                 // 为每只蚂蚁分别选择一条路径
                 for (int i = 1; i < cityNum; i++) {
-                    ants[currentAnt].selectNextCity(pheromone);
+                    ants[currentAnt].selectNextTrack(pheromone);
                 }
 
                 // 把这只蚂蚁起始城市再次加入其禁忌表中，使禁忌表中的城市最终形成一个循环
                 ants[currentAnt].getTabu().add(ants[currentAnt].getFirstCity());
 
                 // 若这只蚂蚁走过所有路径的距离比当前的最佳距离小，则覆盖最佳距离及最佳路径
-                if (ants[currentAnt].getTourLength() < bestLength) {
-                    bestLength = ants[currentAnt].getTourLength();
+                if (ants[currentAnt].getTourLength() < path.getBestLength()) {
+                    path.setBestLength(ants[currentAnt].getTourLength());
                     for (int k = 0; k < cityNum + 1; k++) {
                         bestTour[k] = ants[currentAnt].getTabu().get(k).intValue();
                     }
@@ -179,7 +177,7 @@ public class ACO {
      * 在控制台中输出最佳长度及最佳路径
      */
     private void print() {
-        System.out.println("最佳长度: " + bestLength);
+        System.out.println("最佳长度: " + path.getBestLength());
         System.out.print("最佳路径: ");
         for (int i = 0; i < cityNum - 1; i++) {
             System.out.print(bestTour[i] + 1 + "-");
@@ -200,7 +198,7 @@ public class ACO {
      * @return
      */
     public int getBestLength() {
-        return bestLength;
+        return path.getBestLength();
     }
 
     /**

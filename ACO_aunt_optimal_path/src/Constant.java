@@ -1,7 +1,7 @@
 /**
- * 常量类
  * @author 憨豆酒 YinDou
  * @date 20190924
+ * @descripe 常量类
  */
 public class Constant {
     public static int ANT_QUANTITY = 0; //蚁量模型（Ant-Quantity模型）

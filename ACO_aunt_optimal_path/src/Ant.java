@@ -1,6 +1,3 @@
-/**
- * Created by houseyoung on 16/5/11 19:47.
- */
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -87,7 +84,7 @@ public class Ant {
      * 选择下一个城市
      * @param pheromone
      */
-    public void selectNextCity(double[][] pheromone) {
+    public void selectNextTrack(double[][] pheromone) {
         double[] probability = new double[cityNum]; // 转移概率矩阵
         double sum = 0;
 

@@ -1,11 +1,11 @@
 import java.io.IOException;
 
 /**
- * 测试算法运行效果
  * @author 憨豆酒 YinDou
  * @date 20190924
+ * @descripe 测试算法运行效果
  */
-public class Test {
+public class Main {
     public static void main(String[] args) throws IOException {
         // 读取城市信息
         String tspData = System.getProperty("user.dir") + "/resources/att48.txt";

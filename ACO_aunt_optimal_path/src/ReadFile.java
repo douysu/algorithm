@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * 从文件中读取X坐标矩阵、Y坐标矩阵
  * @author 憨豆酒 YinDou
  * @date 20190924
+ * @descripe 从文件中读取X坐标矩阵、Y坐标矩阵
  */
 public class ReadFile {
     /**
