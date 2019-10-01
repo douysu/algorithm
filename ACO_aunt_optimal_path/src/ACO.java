@@ -9,8 +9,6 @@ public class ACO {
     private int[] y; // Y坐标矩阵
 
     private ArrayList<Node> nodeList;// 节点城市列表
-    //private double[][] distance; // 距离矩阵
-    //private double[][] pheromone; // 信息素矩阵
 
     private Path path;
 
@@ -59,9 +57,6 @@ public class ACO {
         x = ReadFile.getX(cityNum, filename);
         y = ReadFile.getY(cityNum, filename);
 
-        // 计算距离矩阵，两城市之间的距离，存放在对称矩阵中
-        //getDistance(x, y);
-
         // 初始化距离与信息素矩阵
         for (int i = 0; i < cityNum; i++) {
             double distance[] = new double[cityNum];
@@ -78,16 +73,6 @@ public class ACO {
             nodeList.add(new Node(i, distance, pheromone));
         }
 
-
-        // 初始化信息素矩阵
-//        pheromone = new double[cityNum][cityNum];
-//        double start = 1.0 / ((cityNum - 1) * antNum); // 计算初始信息素数值
-//        for (int i = 0; i < cityNum; i++) {
-//            for (int j = 0; j < cityNum; j++) {
-//                pheromone[i][j] = start;
-//            }
-//        }
-
         // 初始化最佳长度及最佳路径
         path.setBestLength(Integer.MAX_VALUE);
         path.initBestTour(cityNum);
@@ -96,30 +81,8 @@ public class ACO {
         for (int i = 0; i < antNum; i++) {
             ants[i] = new Ant(cityNum);
             ants[i].init(nodeList, alpha, beta);
-            //ants[i].init(distance, alpha, beta);
         }
     }
-
-    /**
-     * 计算距离矩阵
-     *
-     * @param x
-     * @param y
-     * @throws IOException
-     */
-//    private void getDistance(int[] x, int[] y) throws IOException {
-//        // 计算距离矩阵
-//        distance = new double[cityNum][cityNum];
-//        for (int i = 0; i < cityNum - 1; i++) {
-//            distance[i][i] = 0; // 对角线为0
-//            for (int j = i + 1; j < cityNum; j++) {
-//                distance[i][j] = Math.sqrt(((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j])) / 10.0);
-//                distance[j][i] = distance[i][j];
-//            }
-//        }
-//        distance[cityNum - 1][cityNum - 1] = 0;
-//
-//    }
 
     /**
      * 解决TSP问题
@@ -132,7 +95,6 @@ public class ACO {
                 // 为每只蚂蚁分别选择一条路径
                 for (int i = 1; i < cityNum; i++) {
                     ants[currentAnt].selectNextTrack(nodeList.get(i).getPheromone());
-                    //ants[currentAnt].selectNextTrack(pheromone);
                 }
 
                 // 把这只蚂蚁起始城市再次加入其禁忌表中，使禁忌表中的城市最终形成一个循环
@@ -155,7 +117,6 @@ public class ACO {
                         }
                         if (deltaType == Constant.ANT_DENSITY) {
                             delta[i][j] = Q / nodeList.get(i).getDistance()[j]; // Ant-density System
-                            //delta[i][j] = Q / distance[i][j]; // Ant-density System
                         }
                         if (deltaType == Constant.ANT_CYCLE) {
                             delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
@@ -171,7 +132,6 @@ public class ACO {
             // 重新初始化蚂蚁，走完一轮
             for (int i = 0; i < antNum; i++) {
                 ants[i].init(nodeList, alpha, beta);
-                //ants[i].init(distance, alpha, beta);
             }
         }
 
@@ -186,8 +146,7 @@ public class ACO {
         // 按照rho系数保留原有信息素
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
-                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j]  * rho;
-                //pheromone[i][j] = pheromone[i][j] * rho;
+                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * rho;
             }
         }
 
@@ -195,8 +154,7 @@ public class ACO {
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
                 for (int ant = 0; ant < antNum; ant++) {
-                    nodeList.get(i).getPheromone()[j]  += ants[ant].getDelta()[i][j];
-                    //pheromone[i][j] += ants[ant].getDelta()[i][j];
+                    nodeList.get(i).getPheromone()[j] += ants[ant].getDelta()[i][j];
                 }
             }
         }

@@ -4,9 +4,6 @@
 //import java.awt.event.ActionListener;
 //import java.io.IOException;
 //
-///**
-// * Created by houseyoung on 16/5/11 23:02.
-// */
 //public class GUI {
 //    // 设置城市数量
 //    int cityNum = 48;

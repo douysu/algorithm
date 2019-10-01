@@ -3,6 +3,7 @@
  * @date 20190930
  * @descripe 蚂蚁类
  */
+
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -11,7 +12,6 @@ public class Ant {
     private ArrayList<Integer> allowedCities; // 下一步允许选择的城市
     private ArrayList<Node> nodeList;// 节点城市列表
     private double[][] delta; // 信息素增量矩阵
-    //private double[][] distance; // 距离矩阵
     private double[][] eta; // 能见度矩阵
 
     private double alpha; // 信息素重要程度系数
@@ -43,7 +43,6 @@ public class Ant {
         this.alpha = alpha;
         this.beta = beta;
         this.nodeList = nodeList;
-        //this.distance = distance;
 
         // 初始化禁忌表为空
         tabu = new ArrayList<Integer>();
@@ -82,8 +81,7 @@ public class Ant {
         for (int i = 0; i < cityNum - 1; i++) {
             eta[i][i] = 0; // 对角线为0
             for (int j = i + 1; j < cityNum; j++) {
-                //eta[i][j] = 1.0 / distance[i][j];
-                eta[i][j] = 1.0 /nodeList.get(i).getDistance()[j];
+                eta[i][j] = 1.0 / nodeList.get(i).getDistance()[j];
                 eta[j][i] = eta[i][j];
             }
         }
@@ -103,14 +101,12 @@ public class Ant {
         // 计算公式分母
         for (int i : allowedCities) {
             sum += Math.pow(nodeList.get(currentCity).getPheromone()[i], alpha) * Math.pow(eta[currentCity][i], beta);
-            //sum += Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta);
         }
 
         // 计算概率矩阵
         for (int i = 0; i < cityNum; i++) {
             if (allowedCities.contains(i)) {
                 probability[i] = (Math.pow(nodeList.get(currentCity).getPheromone()[i], alpha) * Math.pow(eta[currentCity][i], beta)) / sum;
-                //probability[i] = (Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta)) / sum;
             } else {
                 probability[i] = 0;
             }
@@ -154,10 +150,9 @@ public class Ant {
     private int calculateTourLength() {
         int length = 0;
 
-        for (int i = 0; i < cityNum-1; i++) {
-            //length += distance[tabu.get(i)][tabu.get(i + 1)];
+        for (int i = 0; i < cityNum - 1; i++) {
             int currentCityIndex = tabu.get(i);
-            int anotherCityIndex = tabu.get(i+1);
+            int anotherCityIndex = tabu.get(i + 1);
             length += nodeList.get(currentCityIndex).getDistance()[anotherCityIndex];
         }
 
