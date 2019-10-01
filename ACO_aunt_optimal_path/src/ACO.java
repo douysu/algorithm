@@ -18,7 +18,6 @@ public class ACO {
     private double beta; // 城市间距离重要程度系数
     private double rho; // 信息素残留系数
     private int Q; // 蚂蚁循环一周在经过的路径上所释放的信息素总量
-    private int deltaType; // 信息素更新方式模型，0: Ant-quantity; 1: Ant-density; 2: Ant-cycle
 
     /**
      * 构造方法
@@ -31,7 +30,7 @@ public class ACO {
      * @param rho
      * @param Q
      */
-    public ACO(int cityNum, int antNum, int generation, double alpha, double beta, double rho, int Q, int deltaType) {
+    public ACO(int cityNum, int antNum, int generation, double alpha, double beta, double rho, int Q) {
         this.cityNum = cityNum;
         this.antNum = antNum;
         this.generation = generation;
@@ -39,7 +38,6 @@ public class ACO {
         this.beta = beta;
         this.rho = rho;
         this.Q = Q;
-        this.deltaType = deltaType;
 
         ants = new Ant[antNum];
         path = new Path(cityNum);
@@ -60,7 +58,7 @@ public class ACO {
         // 初始化距离与信息素矩阵
         for (int i = 0; i < cityNum; i++) {
             double distance[] = new double[cityNum];
-            double start = 1.0 / ((cityNum - 1) * antNum); // 计算初始信息素数值
+            double start = antNum / 10628.0; // 计算初始信息素数值
             double pheromone[] = new double[cityNum];
             distance[i] = 0; // 本身城市距离0
             pheromone[i] = 0;
@@ -92,7 +90,7 @@ public class ACO {
         for (int g = 0; g < generation; g++) {
             // 对antNum只蚂蚁分别进行操作
             for (int currentAnt = 0; currentAnt < antNum; currentAnt++) {
-                // 为每只蚂蚁分别选择一条路径
+                // 为每只蚂蚁分别选择一条路径，共antNum步
                 for (int i = 1; i < cityNum; i++) {
                     ants[currentAnt].selectNextTrack(nodeList.get(i).getPheromone());
                 }
@@ -107,20 +105,11 @@ public class ACO {
                         path.setBestTour(k, ants[currentAnt].getTabu().get(k).intValue());
                     }
                 }
-
                 // 更新这只蚂蚁信息素增量delta矩阵
                 double[][] delta = ants[currentAnt].getDelta();
                 for (int i = 0; i < cityNum; i++) {
                     for (int j : ants[currentAnt].getTabu()) {
-                        if (deltaType == Constant.ANT_QUANTITY) {
-                            delta[i][j] = Q; // Ant-quantity System
-                        }
-                        if (deltaType == Constant.ANT_DENSITY) {
-                            delta[i][j] = Q / nodeList.get(i).getDistance()[j]; // Ant-density System
-                        }
-                        if (deltaType == Constant.ANT_CYCLE) {
-                            delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
-                        }
+                        delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
                     }
                 }
                 ants[currentAnt].setDelta(delta);
