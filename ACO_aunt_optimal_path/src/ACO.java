@@ -87,7 +87,7 @@ public class ACO {
     /**
      * 解决TSP问题
      */
-    public void solve() {
+    public void movement() {
         // 迭代generation次
         for (int g = 0; g < generation; g++) {
             // 对antNum只蚂蚁分别进行操作
@@ -176,23 +176,5 @@ public class ACO {
      */
     public int getBestLength() {
         return path.getBestLength();
-    }
-
-    /**
-     * 输出X坐标矩阵
-     *
-     * @return
-     */
-    public int[] getX() {
-        return x;
-    }
-
-    /**
-     * 输出Y坐标矩阵
-     *
-     * @return
-     */
-    public int[] getY() {
-        return y;
     }
 }

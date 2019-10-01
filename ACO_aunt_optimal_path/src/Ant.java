@@ -159,15 +159,6 @@ public class Ant {
         return length;
     }
 
-
-    public ArrayList<Integer> getAllowedCities() {
-        return allowedCities;
-    }
-
-    public void setAllowedCities(ArrayList<Integer> allowedCities) {
-        this.allowedCities = allowedCities;
-    }
-
     public int getTourLength() {
         tourLength = calculateTourLength();
         return tourLength;
@@ -175,14 +166,6 @@ public class Ant {
 
     public void setTourLength(int tourLength) {
         this.tourLength = tourLength;
-    }
-
-    public int getCityNum() {
-        return cityNum;
-    }
-
-    public void setCityNum(int cityNum) {
-        this.cityNum = cityNum;
     }
 
     public ArrayList<Integer> getTabu() {

@@ -30,8 +30,8 @@ public class Main {
             ACO aco = new ACO(48, 10, 100, 1.0, 10.0, 0.5, 10, Constant.ANT_QUANTITY);
             // 初始化
             aco.init(tspData);
-            // 计算概率，选择路径
-            aco.solve();
+            // 移动，计算概率，选择路径
+            aco.movement();
             avg += aco.getBestLength();
             if (aco.getBestLength() > max) {
                 max = aco.getBestLength();
