@@ -11,7 +11,7 @@ public class Ant {
     private ArrayList<Integer> allowedCities; // 下一步允许选择的城市
     private ArrayList<Node> nodeList;// 节点城市列表
     private double[][] delta; // 信息素增量矩阵
-    private double[][] distance; // 距离矩阵
+    //private double[][] distance; // 距离矩阵
     private double[][] eta; // 能见度矩阵
 
     private double alpha; // 信息素重要程度系数
@@ -95,19 +95,22 @@ public class Ant {
      *
      * @param pheromone
      */
-    public void selectNextTrack(double[][] pheromone) {
+
+    public void selectNextTrack(double[] pheromone) {
         double[] probability = new double[cityNum]; // 转移概率矩阵
         double sum = 0;
 
         // 计算公式分母
         for (int i : allowedCities) {
-            sum += Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta);
+            sum += Math.pow(nodeList.get(currentCity).getPheromone()[i], alpha) * Math.pow(eta[currentCity][i], beta);
+            //sum += Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta);
         }
 
         // 计算概率矩阵
         for (int i = 0; i < cityNum; i++) {
             if (allowedCities.contains(i)) {
-                probability[i] = (Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta)) / sum;
+                probability[i] = (Math.pow(nodeList.get(currentCity).getPheromone()[i], alpha) * Math.pow(eta[currentCity][i], beta)) / sum;
+                //probability[i] = (Math.pow(pheromone[currentCity][i], alpha) * Math.pow(eta[currentCity][i], beta)) / sum;
             } else {
                 probability[i] = 0;
             }
@@ -151,9 +154,11 @@ public class Ant {
     private int calculateTourLength() {
         int length = 0;
 
-        for (int i = 0; i < cityNum; i++) {
+        for (int i = 0; i < cityNum-1; i++) {
             //length += distance[tabu.get(i)][tabu.get(i + 1)];
-            length += nodeList.get(i).getDistance()[i+1];
+            int currentCityIndex = tabu.get(i);
+            int anotherCityIndex = tabu.get(i+1);
+            length += nodeList.get(currentCityIndex).getDistance()[anotherCityIndex];
         }
 
         return length;

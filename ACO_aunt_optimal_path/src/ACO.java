@@ -10,7 +10,7 @@ public class ACO {
 
     private ArrayList<Node> nodeList;// 节点城市列表
     //private double[][] distance; // 距离矩阵
-    private double[][] pheromone; // 信息素矩阵
+    //private double[][] pheromone; // 信息素矩阵
 
     private Path path;
 
@@ -124,57 +124,60 @@ public class ACO {
     /**
      * 解决TSP问题
      */
-//    public void solve() {
-//        // 迭代generation次
-//        for (int g = 0; g < generation; g++) {
-//            // 对antNum只蚂蚁分别进行操作
-//            for (int currentAnt = 0; currentAnt < antNum; currentAnt++) {
-//                // 为每只蚂蚁分别选择一条路径
-//                for (int i = 1; i < cityNum; i++) {
-//                    ants[currentAnt].selectNextTrack(pheromone);
-//                }
-//
-//                // 把这只蚂蚁起始城市再次加入其禁忌表中，使禁忌表中的城市最终形成一个循环
-//                ants[currentAnt].getTabu().add(ants[currentAnt].getFirstCity());
-//
-//                // 若这只蚂蚁走过所有路径的距离比当前的最佳距离小，则覆盖最佳距离及最佳路径
-//                if (ants[currentAnt].getTourLength() < path.getBestLength()) {
-//                    path.setBestLength(ants[currentAnt].getTourLength());
-//                    for (int k = 0; k < cityNum + 1; k++) {
-//                        path.setBestTour(k, ants[currentAnt].getTabu().get(k).intValue());
-//                    }
-//                }
-//
-//                // 更新这只蚂蚁信息素增量delta矩阵
-//                double[][] delta = ants[currentAnt].getDelta();
-//                for (int i = 0; i < cityNum; i++) {
-//                    for (int j : ants[currentAnt].getTabu()) {
-//                        if (deltaType == Constant.ANT_QUANTITY) {
-//                            delta[i][j] = Q; // Ant-quantity System
-//                        }
-//                        if (deltaType == Constant.ANT_DENSITY) {
-//                            delta[i][j] = Q / distance[i][j]; // Ant-density System
-//                        }
-//                        if (deltaType == Constant.ANT_CYCLE) {
-//                            delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
-//                        }
-//                    }
-//                }
-//                ants[currentAnt].setDelta(delta);
-//            }
-//
-//            // 更新信息素
-//            updatePheromone();
-//
-//            // 重新初始化蚂蚁，走完一轮
-//            for (int i = 0; i < antNum; i++) {
-//                ants[i].init(distance, alpha, beta);
-//            }
-//        }
-//
-//        // 打印最佳结果
-//        path.printBestLengthAndTour();
-//    }
+    public void solve() {
+        // 迭代generation次
+        for (int g = 0; g < generation; g++) {
+            // 对antNum只蚂蚁分别进行操作
+            for (int currentAnt = 0; currentAnt < antNum; currentAnt++) {
+                // 为每只蚂蚁分别选择一条路径
+                for (int i = 1; i < cityNum; i++) {
+                    ants[currentAnt].selectNextTrack(nodeList.get(i).getPheromone());
+                    //ants[currentAnt].selectNextTrack(pheromone);
+                }
+
+                // 把这只蚂蚁起始城市再次加入其禁忌表中，使禁忌表中的城市最终形成一个循环
+                ants[currentAnt].getTabu().add(ants[currentAnt].getFirstCity());
+
+                // 若这只蚂蚁走过所有路径的距离比当前的最佳距离小，则覆盖最佳距离及最佳路径
+                if (ants[currentAnt].getTourLength() < path.getBestLength()) {
+                    path.setBestLength(ants[currentAnt].getTourLength());
+                    for (int k = 0; k < cityNum + 1; k++) {
+                        path.setBestTour(k, ants[currentAnt].getTabu().get(k).intValue());
+                    }
+                }
+
+                // 更新这只蚂蚁信息素增量delta矩阵
+                double[][] delta = ants[currentAnt].getDelta();
+                for (int i = 0; i < cityNum; i++) {
+                    for (int j : ants[currentAnt].getTabu()) {
+                        if (deltaType == Constant.ANT_QUANTITY) {
+                            delta[i][j] = Q; // Ant-quantity System
+                        }
+                        if (deltaType == Constant.ANT_DENSITY) {
+                            delta[i][j] = Q / nodeList.get(i).getDistance()[j]; // Ant-density System
+                            //delta[i][j] = Q / distance[i][j]; // Ant-density System
+                        }
+                        if (deltaType == Constant.ANT_CYCLE) {
+                            delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
+                        }
+                    }
+                }
+                ants[currentAnt].setDelta(delta);
+            }
+
+            // 更新信息素
+            updatePheromone();
+
+            // 重新初始化蚂蚁，走完一轮
+            for (int i = 0; i < antNum; i++) {
+                ants[i].init(nodeList, alpha, beta);
+                //ants[i].init(distance, alpha, beta);
+            }
+        }
+
+        // 打印最佳结果
+        path.printBestLengthAndTour();
+    }
 
     /**
      * 更新信息素
@@ -183,7 +186,8 @@ public class ACO {
         // 按照rho系数保留原有信息素
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
-                pheromone[i][j] = pheromone[i][j] * rho;
+                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j]  * rho;
+                //pheromone[i][j] = pheromone[i][j] * rho;
             }
         }
 
@@ -191,7 +195,8 @@ public class ACO {
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
                 for (int ant = 0; ant < antNum; ant++) {
-                    pheromone[i][j] += ants[ant].getDelta()[i][j];
+                    nodeList.get(i).getPheromone()[j]  += ants[ant].getDelta()[i][j];
+                    //pheromone[i][j] += ants[ant].getDelta()[i][j];
                 }
             }
         }
