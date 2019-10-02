@@ -1,7 +1,7 @@
 % @author 憨豆酒 YinDou yindou97@163.com
 % @date 20191002
 % @description radon直线检测 
-% 建议先阅读本节博客：
+% 建议先阅读本节博客：https://modestbean.github.io/2019/10/02/image-radon/#more
 % 本节实现的为检测一条直线，若想实现检测多条直线，需要计算多次最大值
 clc
 clear all;
@@ -11,6 +11,7 @@ close all;
 I = fitsread('solarspectra.fts');
 I = mat2gray(I);
 figure(1),imshow(I);
+figure(2),imshow(I);
 BW = edge(I);
 [height, width ] = size (I);
 width_half = width / 2.0;
@@ -58,7 +59,7 @@ else
 end
 yT = k*xT;
 
-% 检测的直线与图像上下的交点，涉及到图像坐标系变换，详情见博客：
+% 检测的直线与图像上下的交点，涉及到图像坐标系变换，详情见博客
 y1 = 0.0;
 x1 = (height_half - y1 - yT)/k2 + xT + width_half;
 y2 = 165.0;
@@ -68,7 +69,7 @@ hold on;
 line([x1, x2],[y1,y2],'color','r','LineWidth',1); 
 
 % 绘制randon图
-figure(2)
+figure(3)
 imagesc(theta, xp, R); colormap(hot);
 xlabel('\theta (degrees)');
 ylabel('x^{\prime} (pixels from center)');
