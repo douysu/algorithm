@@ -1,3 +1,10 @@
+/**
+ * @author 憨豆酒 YinDou
+ * @date 20190930
+ * @descripe 算法类
+ * @website https://github.com/ModestBean
+ */
+
 import java.io.IOException;
 import java.util.ArrayList;
 

@@ -2,6 +2,7 @@
  * @author 憨豆酒 YinDou
  * @date 20190930
  * @descripe 路径类，存储最佳长度和路径
+ * @website https://github.com/ModestBean
  */
 public class Path {
     private int bestLength; // 最佳长度

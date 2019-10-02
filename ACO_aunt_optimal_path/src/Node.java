@@ -2,6 +2,7 @@
  * @author 憨豆酒 YinDou
  * @date 20190930
  * @descripe 节点城市类
+ * @website https://github.com/ModestBean
  */
 public class Node {
     private int id; //节点标号

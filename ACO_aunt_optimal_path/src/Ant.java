@@ -2,6 +2,7 @@
  * @author 憨豆酒 YinDou
  * @date 20190930
  * @descripe 蚂蚁类
+ * @website https://github.com/ModestBean
  */
 
 import java.util.Random;
