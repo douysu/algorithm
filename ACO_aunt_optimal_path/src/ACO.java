@@ -139,14 +139,14 @@ public class ACO {
      * 更新信息素
      */
     private void updatePheromone() {
-        // 按照rho系数保留原有信息素
+        // 信息素挥发，rho
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
-                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * rho;
+                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * (1 - rho);
             }
         }
 
-        // 按照蚂蚁留下的信息素增量矩阵更新信息素
+        // 信息素增强，delta
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
                 for (int ant = 0; ant < antNum; ant++) {
