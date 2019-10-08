@@ -103,19 +103,19 @@ public class ACO {
                 }
 
                 // 把这只蚂蚁起始城市再次加入其禁忌表中，使禁忌表中的城市最终形成一个循环
-                ants[currentAnt].getTabu().add(ants[currentAnt].getFirstCity());
+                ants[currentAnt].getTaboo().add(ants[currentAnt].getFirstCity());
 
                 // 若这只蚂蚁走过所有路径的距离比当前的最佳距离小，则覆盖最佳距离及最佳路径
                 if (ants[currentAnt].getTourLength() < path.getBestLength()) {
                     path.setBestLength(ants[currentAnt].getTourLength());
                     for (int k = 0; k < cityNum + 1; k++) {
-                        path.setBestTour(k, ants[currentAnt].getTabu().get(k).intValue());
+                        path.setBestTour(k, ants[currentAnt].getTaboo().get(k).intValue());
                     }
                 }
                 // 更新这只蚂蚁信息素增量delta矩阵
                 double[][] delta = ants[currentAnt].getDelta();
                 for (int i = 0; i < cityNum; i++) {
-                    for (int j : ants[currentAnt].getTabu()) {
+                    for (int j : ants[currentAnt].getTaboo()) {
                         delta[i][j] = Q / ants[currentAnt].getTourLength(); // Ant-cycle System
                     }
                 }

@@ -50,7 +50,7 @@ y0 = 0.0;
 % 定义变量x
 syms x 
 d = sqrt((k*x-y0)^2+(x-x0)^2);
-soln  = solve(d == abs(max_line_distance),x);
+soln = solve(d == abs(max_line_distance),x);
 % radon的峰值在图像左侧，所以判断。 不同的图像注意区分，如若使用此代码记得修改
 if soln(1)<=0
     xT = soln(1);

@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class Ant {
-    private ArrayList<Integer> tabu; // 禁忌表
+    private ArrayList<Integer> taboo; // 禁忌表
     private ArrayList<Integer> allowedCities; // 下一步允许选择的城市
     private ArrayList<Node> nodeList;// 节点城市列表
     private double[][] delta; // 信息素增量矩阵
@@ -46,7 +46,7 @@ public class Ant {
         this.nodeList = nodeList;
 
         // 初始化禁忌表为空
-        tabu = new ArrayList<Integer>();
+        taboo = new ArrayList<Integer>();
 
         // 初始化信息素增量矩阵为0
         // 初始化下一步允许选择的城市为所有城市
@@ -72,7 +72,7 @@ public class Ant {
         }
 
         // 已访问过的城市集合中添加起始城市
-        tabu.add(firstCity);
+        taboo.add(firstCity);
 
         // 将当前城市设为起始城市
         currentCity = firstCity;
@@ -137,7 +137,7 @@ public class Ant {
         }
 
         // 在禁忌表中添加选择的城市
-        tabu.add(selectCity);
+        taboo.add(selectCity);
 
         // 将当前城市改为选择的城市
         currentCity = selectCity;
@@ -152,8 +152,8 @@ public class Ant {
         int length = 0;
 
         for (int i = 0; i < cityNum - 1; i++) {
-            int currentCityIndex = tabu.get(i);
-            int anotherCityIndex = tabu.get(i + 1);
+            int currentCityIndex = taboo.get(i);
+            int anotherCityIndex = taboo.get(i + 1);
             length += nodeList.get(currentCityIndex).getDistance()[anotherCityIndex];
         }
 
@@ -169,12 +169,12 @@ public class Ant {
         this.tourLength = tourLength;
     }
 
-    public ArrayList<Integer> getTabu() {
-        return tabu;
+    public ArrayList<Integer> getTaboo() {
+        return taboo;
     }
 
-    public void setTabu(ArrayList<Integer> tabu) {
-        this.tabu = tabu;
+    public void setTaboo(ArrayList<Integer> taboo) {
+        this.taboo = taboo;
     }
 
     public double[][] getDelta() {
