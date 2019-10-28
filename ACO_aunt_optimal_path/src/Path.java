@@ -19,10 +19,10 @@ public class Path {
     public void printBestLengthAndTour() {
         System.out.println("最佳长度: " + bestLength);
         System.out.print("最佳路径: ");
-        for (int i = 0; i < cityNum - 1; i++) {
+        for (int i = 0; i < cityNum ; i++) {
             System.out.print(bestTour[i] + 1 + "-");
         }
-        System.out.println(bestTour[cityNum - 1] + 1);
+        System.out.println(bestTour[cityNum] + 1);
     }
 
     /**

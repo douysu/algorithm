@@ -1,7 +1,7 @@
 /**
  * @author 憨豆酒 YinDou
  * @date 20190930
- * @descripe 算法类
+ * @descripe 主算法类
  * @website https://github.com/ModestBean
  */
 
@@ -139,19 +139,24 @@ public class ACO {
      * 更新信息素
      */
     private void updatePheromone() {
-        // 信息素挥发，rho
+        // 路径信息素增加
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
-                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * (1 - rho);
+                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * rho;
             }
         }
-
-        // 信息素增强，delta
         for (int i = 0; i < cityNum; i++) {
             for (int j = 0; j < cityNum; j++) {
                 for (int ant = 0; ant < antNum; ant++) {
                     nodeList.get(i).getPheromone()[j] += ants[ant].getDelta()[i][j];
                 }
+            }
+        }
+
+        // 路径信息素挥发，rho
+        for (int i = 0; i < cityNum; i++) {
+            for (int j = 0; j < cityNum; j++) {
+                nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * (1 - rho);
             }
         }
     }
