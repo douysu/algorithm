@@ -165,16 +165,8 @@ public class Ant {
         return tourLength;
     }
 
-    public void setTourLength(int tourLength) {
-        this.tourLength = tourLength;
-    }
-
     public ArrayList<Integer> getTaboo() {
         return taboo;
-    }
-
-    public void setTaboo(ArrayList<Integer> taboo) {
-        this.taboo = taboo;
     }
 
     public double[][] getDelta() {
@@ -189,7 +181,4 @@ public class Ant {
         return firstCity;
     }
 
-    public void setFirstCity(int firstCity) {
-        this.firstCity = firstCity;
-    }
 }

@@ -17,7 +17,7 @@ public class ACO {
 
     private ArrayList<Node> nodeList;// 节点城市列表
 
-    private Path path;
+    public Path path;
 
     private int antNum; // 蚂蚁数量
     private int generation; // 迭代次数
@@ -159,23 +159,5 @@ public class ACO {
                 nodeList.get(i).getPheromone()[j] = nodeList.get(i).getPheromone()[j] * (1 - rho);
             }
         }
-    }
-
-    /**
-     * 输出最佳路径
-     *
-     * @return
-     */
-    public int[] getBestTour() {
-        return path.getBestTour();
-    }
-
-    /**
-     * 输出最佳长度
-     *
-     * @return
-     */
-    public int getBestLength() {
-        return path.getBestLength();
     }
 }

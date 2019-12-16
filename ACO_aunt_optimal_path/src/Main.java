@@ -33,12 +33,13 @@ public class Main {
             aco.init(tspData);
             // 移动，计算概率，选择路径
             aco.movement();
-            avg += aco.getBestLength();
-            if (aco.getBestLength() > max) {
-                max = aco.getBestLength();
+            int curBestLength = aco.path.getBestLength();
+            avg += curBestLength;
+            if (curBestLength > max) {
+                max = curBestLength;
             }
-            if (aco.getBestLength() < min) {
-                min = aco.getBestLength();
+            if (curBestLength< min) {
+                min = curBestLength;
             }
         }
         // 计时器结束
