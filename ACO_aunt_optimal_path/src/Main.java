@@ -1,10 +1,9 @@
 import java.io.IOException;
 
 /**
- * @author 憨豆酒 YinDou
+ * @author 憨豆酒 YinDou https://github.com/ModestBean
  * @date 20190924
  * @descripe 测试算法运行效果
- * @website https://github.com/ModestBean
  */
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,7 +18,7 @@ public class Main {
         // 计时器开始
         long startTime = System.currentTimeMillis();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             // 城市数量, 蚂蚁数量, 迭代次数, Alpha, Beta, Rho, Q, QType
             /*
              * Alpha：信息启发式，Alpha值越大，蚂蚁选择之前走过路径的可能性就越大；值越小，蚁群搜索范围就越小，容易陷入局部最优。

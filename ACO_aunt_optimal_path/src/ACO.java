@@ -5,6 +5,7 @@
  * @website https://github.com/ModestBean
  */
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class ACO {
     private ArrayList<Node> nodeList;// 节点城市列表
 
     public Path path;
+    AntFrame antFrame;
 
     private int antNum; // 蚂蚁数量
     private int generation; // 迭代次数
@@ -130,9 +132,11 @@ public class ACO {
                 ants[i].init(nodeList, alpha, beta);
             }
         }
-
         // 打印最佳结果
         path.printBestLengthAndTour();
+        // 显示界面
+        antFrame = new AntFrame(x, y, cityNum, path.getBestLength(), path.getBestTour());
+
     }
 
     /**

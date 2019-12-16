@@ -54,4 +54,11 @@ public class Path {
     public void setBestTour(int index, int value) {
         bestTour[index] = value;
     }
+
+    /**
+     * 得到最佳路径
+     */
+    public int[] getBestTour() {
+        return bestTour;
+    }
 }
