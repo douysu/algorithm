@@ -18,10 +18,6 @@
 
 ## 3D图形学
 
-[3D-PLY文件读取](./3D-PLY)
-
-[3D-骨架提取](./3D-skeleton)
-
 ## 图像
 
 [图像处理算法](./image-processing)
